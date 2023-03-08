@@ -1,0 +1,2 @@
+wk3_pkg
+-DCATKIN_DEVEL_PREFIX=/home/sebasjoyap/week3_ws/devel -DCMAKE_INSTALL_PREFIX=/home/sebasjoyap/week3_ws/install -G Unix Makefiles

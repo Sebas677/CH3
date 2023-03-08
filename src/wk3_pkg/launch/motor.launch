@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<launch>
+    <rosparam file = "$(find wk3_pkg)/config/params.yaml" command = "load"   />
+    <node name="signal_generator" pkg="wk3_pkg" type="Input.py" output="screen" launch-prefix="gnome-terminal --command" />
+    <node name="rqt_plot" pkg="rqt_plot" type="rqt_plot" output="screen" />
+    
+</launch>
