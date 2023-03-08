@@ -1,0 +1,87 @@
+_______________________________________________________________________
+ARDUINO
+
+
+#include <ros.h>
+#include <std_msgs/Float32.h>
+
+
+ros::NodeHandle nh;
+
+
+int in1=3;
+int in2=5;
+
+
+int enA=6;
+
+
+int flag=0;
+
+
+// La función que se llama cada que llega un mensaje al Subsriber
+void messageCb(const std_msgs::Float32& val_msg){
+
+
+
+
+
+
+ if(val_msg.data>0){
+   analogWrite(enA,  val_msg.data);
+   digitalWrite(in1, HIGH);
+   digitalWrite(in2, LOW);
+
+
+ }
+ else{
+   analogWrite(enA,  abs(val_msg.data));
+   digitalWrite(in1, LOW);
+   digitalWrite(in2, HIGH);
+
+
+ }
+ delay(1);
+
+
+
+
+ 
+
+
+}
+
+
+// El subscriber al tópico señal en donde manda el valor a messageCb
+ros::Subscriber<std_msgs::Float32> sub("/signal", &messageCb);
+
+
+
+
+
+
+void setup() {
+ // put your setup code here, to run once:
+ pinMode(in1, OUTPUT);
+ pinMode(in2, OUTPUT);
+ pinMode(enA, OUTPUT);
+
+
+ //Serial.begin(57600);
+ nh.initNode();
+ nh.subscribe(sub);
+}
+
+
+
+
+void loop() {
+ // put your main code here, to run repeatedly:
+ //sine();
+ //msine();
+ // Inicializamos al nodo y le indicamos que se suscriba
+ nh.spinOnce();
+ delay(1);
+
+
+ }
